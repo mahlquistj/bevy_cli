@@ -18,7 +18,7 @@ in
     pname = "bevy_lint_driver";
     src = ./.;
 
-    cargoBuildFlags = "--bin bevy_lint";
+    cargoBuildFlags = "--bin bevy_lint_driver";
 
     cargoLock.lockFile = ./Cargo.lock;
 
