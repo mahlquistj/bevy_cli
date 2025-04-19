@@ -42,7 +42,19 @@
 
         formatter = pkgs.alejandra;
         packages = {
-          default = with self'.packages; [bevy-cli bevy_lint];
+          default = pkgs.symlinkJoin {
+            name = "bevy-tools";
+
+            paths = with self'.packages; [
+              bevy-cli
+              bevy_lint
+            ];
+
+            meta = {
+              description = "Combined package for bevy-cli and bevy_lint";
+            };
+          };
+
           bevy-cli = pkgs.callPackage mkBevyCli {inherit rust-toolchain;};
           bevy_lint = pkgs.callPackage mkBevyLint {inherit rust-toolchain;};
         };

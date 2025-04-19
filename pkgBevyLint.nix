@@ -18,6 +18,16 @@ in
     name = "bevy_lint";
     src = ./bevy_lint/.;
 
+    cargoLock = let
+      fixupLockFile = path: (builtins.readFile path);
+    in {
+      lockFileContents = fixupLockFile ./Cargo.lock;
+    };
+
+    postPatch = ''
+      ln -s ${./Cargo.lock} Cargo.lock
+    '';
+
     buildInputs = rlinkLibs;
     runtimeDependencies = rlinkLibs;
 
