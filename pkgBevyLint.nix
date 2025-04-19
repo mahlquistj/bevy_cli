@@ -24,6 +24,10 @@ in
       lockFileContents = fixupLockFile ./Cargo.lock;
     };
 
+    postPatch = ''
+      ln -s ${./Cargo.lock} Cargo.lock
+    '';
+
     buildInputs = rlinkLibs;
     runtimeDependencies = rlinkLibs;
 
