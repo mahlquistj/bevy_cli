@@ -24,12 +24,6 @@ in
       lockFileContents = fixupLockFile ./Cargo.lock;
     };
 
-    # cargoLock.lockFile = ./Cargo.lock;
-    cargoPatches = [
-      # a patch file to add/update Cargo.lock in the source code
-      ./Cargo.lock
-    ];
-
     buildInputs = rlinkLibs;
     runtimeDependencies = rlinkLibs;
 
