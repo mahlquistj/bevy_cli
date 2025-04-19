@@ -16,17 +16,9 @@ in
   rustPlatform.buildRustPackage {
     inherit (cargoToml.package) version;
     pname = "bevy_lint";
-    src = ./bevy_lint/.;
+    src = ./.;
 
-    cargoLock = let
-      fixupLockFile = path: builtins.readFile path;
-    in {
-      lockFileContents = fixupLockFile ./Cargo.lock;
-    };
-
-    postPatch = ''
-      ln -s ${./Cargo.lock} Cargo.lock
-    '';
+    cargoLock.lockFile = ./Cargo.lock;
 
     buildInputs = rlinkLibs;
     runtimeDependencies = rlinkLibs;
