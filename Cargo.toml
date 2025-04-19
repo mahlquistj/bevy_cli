@@ -19,6 +19,10 @@ path = "src/bin/main.rs"
 name = "bevy_lint"
 path = "bevy_lint/src/bin/main.rs"
 
+[[bin]]
+name = "bevy_lint_driver"
+path = "bevy_lint/src/bin/driver.rs"
+
 [features]
 default = ["rustup", "web"]
 

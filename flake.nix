@@ -24,8 +24,9 @@
       }: let
         rust-toolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
 
-        mkBevyCli = import ./pkgBevyCli.nix;
-        mkBevyLint = import ./pkgBevyLint.nix;
+        mkBevyCli = import ./nix/pkgBevyCli.nix;
+        mkBevyLint = import ./nix/pkgBevyLint.nix;
+        mkBevyLintDriver = import ./nix/pkgBevyLintDriver.nix;
 
         runtimeDeps = self'.packages.bevy-cli.runtimeDependencies;
         tools = self'.packages.bevy-cli.nativeBuildInputs ++ self'.packages.bevy-cli.buildInputs ++ [rust-toolchain];
@@ -48,15 +49,17 @@
             paths = with self'.packages; [
               bevy-cli
               bevy_lint
+              bevy_lint_driver
             ];
 
             meta = {
-              description = "Combined package for bevy-cli and bevy_lint";
+              description = "Combined package for bevy-cli, bevy_lint and bevy_lint_driver";
             };
           };
 
           bevy-cli = pkgs.callPackage mkBevyCli {inherit rust-toolchain;};
           bevy_lint = pkgs.callPackage mkBevyLint {inherit rust-toolchain;};
+          bevy_lint_driver = pkgs.callPackage mkBevyLintDriver {inherit rust-toolchain;};
         };
       };
     };
