@@ -25,7 +25,7 @@ in
     };
 
     postPatch = ''
-      ln -s ${./Cargo.lock} Cargo.lock
+      ln -s ${./Cargo.lock} Cargo.lock && chmod +rw ${./Cargo.lock};
     '';
 
     buildInputs = rlinkLibs;
