@@ -18,7 +18,7 @@ in
     name = "bevy_lint";
     src = ./bevy_lint/.;
 
-    cargoLock.lockFile = ./Cargo.lock;
+    cargoLock.lockFile = ../Cargo.lock;
 
     buildInputs = rlinkLibs;
     runtimeDependencies = rlinkLibs;
