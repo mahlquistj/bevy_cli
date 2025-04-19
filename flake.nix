@@ -24,9 +24,9 @@
       }: let
         rust-toolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
 
-        mkBevyCli = import ./nix/pkgBevyCli.nix;
-        mkBevyLint = import ./nix/pkgBevyLint.nix;
-        mkBevyLintDriver = import ./nix/pkgBevyLintDriver.nix;
+        mkBevyCli = import ./pkgBevyCli.nix;
+        mkBevyLint = import ./pkgBevyLint.nix;
+        mkBevyLintDriver = import ./pkgBevyLintDriver.nix;
 
         runtimeDeps = self'.packages.bevy-cli.runtimeDependencies;
         tools = self'.packages.bevy-cli.nativeBuildInputs ++ self'.packages.bevy-cli.buildInputs ++ [rust-toolchain];
