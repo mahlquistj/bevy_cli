@@ -18,6 +18,8 @@ in
     pname = "bevy_lint";
     src = ./.;
 
+    cargoBuildFlags = "--bin bevy_lint";
+
     cargoLock.lockFile = ./Cargo.lock;
 
     buildInputs = rlinkLibs;
