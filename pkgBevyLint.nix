@@ -15,10 +15,10 @@
 in
   rustPlatform.buildRustPackage {
     inherit (cargoToml.package) version;
-    name = "bevy_lint";
-    src = ./bevy_lint/.;
+    pname = "bevy_lint";
+    src = ./.;
 
-    cargoLock.lockFile = ../Cargo.lock;
+    cargoLock.lockFile = ./Cargo.lock;
 
     buildInputs = rlinkLibs;
     runtimeDependencies = rlinkLibs;

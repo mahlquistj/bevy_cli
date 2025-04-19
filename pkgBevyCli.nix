@@ -15,7 +15,7 @@
 in
   rustPlatform.buildRustPackage {
     inherit (cargoToml.package) version;
-    name = "bevy_cli";
+    pname = "bevy_cli";
     src = ./.;
     cargoLock.lockFile = ./Cargo.lock;
 
