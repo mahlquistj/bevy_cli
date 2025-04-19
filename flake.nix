@@ -25,6 +25,7 @@
         rust-toolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
 
         mkBevyCli = import ./pkgBevyCli.nix;
+        mkBevyLint = import ./pkgBevyLint.nix;
 
         runtimeDeps = self'.packages.bevy-cli.runtimeDependencies;
         tools = self'.packages.bevy-cli.nativeBuildInputs ++ self'.packages.bevy-cli.buildInputs ++ [rust-toolchain];
@@ -33,15 +34,18 @@
           inherit system;
           overlays = [(import inputs.rust-overlay)];
         };
+
         devShells.default = pkgs.mkShell {
           LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeDeps}";
           packages = tools;
         };
 
         formatter = pkgs.alejandra;
-        packages.default = self'.packages.bevy-cli;
-
-        packages.bevy-cli = pkgs.callPackage mkBevyCli {inherit rust-toolchain;};
+        packages = {
+          default = with self'.packages; [bevy-cli bevy_lint];
+          bevy-cli = pkgs.callPackage mkBevyCli {inherit rust-toolchain;};
+          bevy_lint = pkgs.callPackage mkBevyLint {inherit rust-toolchain;};
+        };
       };
     };
 }
